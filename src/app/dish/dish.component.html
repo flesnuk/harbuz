@@ -1,0 +1,3 @@
+<input type="text" #ingredientName>
+<button class="btn btn-primary" (click)="addIngredient(ingredientName)">Add ingredient</button>
+<div *ngFor="let ingredient of ingredients"></div>

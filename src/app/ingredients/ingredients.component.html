@@ -1,0 +1,8 @@
+<input type="text" #ingredientName (keyup.enter)="addIngredient(ingredientName)">
+<button class="btn btn-primary" (click)="addIngredient(ingredientName)">Add ingredient</button>
+	<div class="row">
+		<div class="col-sm-4"><b>Nombre</b></div>
+		<div class="col-sm-4"><b>Precio</b></div>
+		<div class="col-sm-4"><b>Stock</b></div>
+	</div>
+<app-ingredient *ngFor="let ingredient of ingredients" [ingredient]="ingredient"></app-ingredient>
