@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Ingredient } from '../models/ingredient.interface';
 
 @Component({
@@ -7,12 +7,11 @@ import { Ingredient } from '../models/ingredient.interface';
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-	ingredients: Ingredient[]
+	@Input() ingredients: Ingredient[]
   id : number
 
 
   constructor() { 
-  	this.ingredients = [{ id:0, name : "arroz", price : 0, stock: 0}, { id:1, name : "agua", price : 0, stock: 0}];
     this.id = 2;
   }
 

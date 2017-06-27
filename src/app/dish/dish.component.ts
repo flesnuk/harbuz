@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IngredientComponent } from '../ingredient/ingredient.component';
+import { Component, OnInit, Input } from '@angular/core';
+import { Ingredient } from '../models/ingredient.interface';
 
 @Component({
   selector: 'app-dish',
@@ -10,20 +10,21 @@ export class DishComponent implements OnInit {
 
 	name: string[]
 	active: boolean
-	ingredients: IngredientComponent[]
+	@Input() ingredients: Ingredient[]
+	ingredientsUsed : Ingredient[]
+	selectedIngredient : Ingredient
 	thermalEnergy: ThermalEnergy
 	prepTime: PrepTime
 
   constructor() {
-  		this.ingredients = [];
+  		this.ingredientsUsed = [];
    }
 
   ngOnInit() {
   }
 
-  addIngredient(name: HTMLInputElement){
-  	let ingredient : IngredientComponent = new IngredientComponent();
-  	this.ingredients.push(ingredient);
+  addIngredient(ingredient: Ingredient){
+  	this.ingredientsUsed.push(ingredient);
   }
 
 }

@@ -1,3 +1,12 @@
-<input type="text" #ingredientName>
-<button class="btn btn-primary" (click)="addIngredient(ingredientName)">Add ingredient</button>
-<div *ngFor="let ingredient of ingredients"></div>
+Plato: <input type="text" [(ngModel)]="name">
+<br>
+<hr>
+<div class="row">
+<div class="col-lg-2">
+	<select class="form-control" [(ngModel)]="selectedIngredient">
+		<option *ngFor="let ingredient of ingredients" [ngValue]="ingredient"> {{ingredient.name}} </option>	
+	</select>
+</div>
+<button class="btn btn-primary" (click)="addIngredient(selectedIngredient)">Add ingredient</button>
+</div>
+<app-ingredient *ngFor="let ingredient of ingredientsUsed" [ingredient]="ingredient"></app-ingredient>

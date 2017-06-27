@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Ingredient } from './models/ingredient.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  name = 'app';
+  ingredients: Ingredient[];
+
+  constructor () {
+  	this.ingredients = [{ id:0, name : "arroz", price : 4, stock: 5}, { id:1, name : "agua", price : 1, stock: 10}];
+  }
 }

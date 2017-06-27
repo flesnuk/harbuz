@@ -16,7 +16,6 @@ export class IngredientComponent implements OnInit {
   }
 
   ngDoCheck(){
-  	console.log(this.ingredient);
   }
 
 }
