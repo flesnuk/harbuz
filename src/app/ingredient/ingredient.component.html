@@ -1,5 +1,6 @@
-<div class="row">
-	<div class="col-sm-4">{{ingredient.name}}</div>
-	<div class="col-sm-4"><input type="number" [(ngModel)]="ingredient.price"></div>
-	<div class="col-sm-4"><input type="number" [(ngModel)]="ingredient.stock"></div>
+<div class="row" style="margin-top: 15px;">
+	<div class="col-sm-3">{{ingredient.name}}</div>
+	<div class="col-sm-3"><input type="number" [(ngModel)]="ingredient.price"></div>
+	<div class="col-sm-3"><input type="number" [(ngModel)]="ingredient.stock"></div>
+	<div class="col-sm-3"><ng-content></ng-content></div>
 </div>

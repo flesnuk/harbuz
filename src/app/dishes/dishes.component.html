@@ -1,0 +1,7 @@
+Dish: <input type="text" #dishName >
+Time: 	<input type="number" style='width:4em' #dishMinutes > <span>:</span>
+		<input type="number" style='width:4em' #dishSeconds (keyup.enter)=" addDish( dishName, dishMinutes.value, dishSeconds.value )">
+<button class="btn btn-primary" (click)="addDish( dishName, dishMinutes.value, dishSeconds.value )">Add dish</button>
+<br>
+<hr>
+<app-dish *ngFor="let dish of dishes" [dish]="dish" [ingredients]="ingredients"></app-dish>

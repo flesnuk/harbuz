@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ingredient } from '../models/ingredient.interface';
+import { Ingredient, IngredientQuantity } from '../models/ingredient.class';
+import { Dish } from '../models/dish.class';
 
 @Component({
   selector: 'app-dish',
@@ -8,39 +9,21 @@ import { Ingredient } from '../models/ingredient.interface';
 })
 export class DishComponent implements OnInit {
 
-	name: string[]
-	active: boolean
+	@Input() dish: Dish
 	@Input() ingredients: Ingredient[]
-	ingredientsUsed : Ingredient[]
 	selectedIngredient : Ingredient
-	thermalEnergy: ThermalEnergy
-	prepTime: PrepTime
 
   constructor() {
-  		this.ingredientsUsed = [];
    }
 
   ngOnInit() {
   }
 
   addIngredient(ingredient: Ingredient){
-  	this.ingredientsUsed.push(ingredient);
+  	this.dish.ingredientsUsed.push({ingredient: ingredient, quantity: 0 });
   }
 
+  increment() {this.dish.time.seconds++;}
+
 }
 
-class ThermalEnergy {
-	watts: number 
-	
-	constructor(watts: number) {
-		this.watts = watts
-	}
-}
-
-class PrepTime {
-	seconds: number 
-	
-	constructor(seconds: number) {
-		this.seconds = seconds
-	}
-}

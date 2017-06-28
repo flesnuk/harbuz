@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { IngredientComponent } from './ingredient/ingredient.component';
 import { DishComponent } from './dish/dish.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
+import { DishesComponent } from './dishes/dishes.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
     IngredientComponent,
     DishComponent,
     IngredientsComponent,
+    DishesComponent,
   ],
   imports: [
     BrowserModule, FormsModule

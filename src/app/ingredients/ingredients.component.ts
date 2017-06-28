@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ingredient } from '../models/ingredient.interface';
+import { Ingredient } from '../models/ingredient.class';
 
 @Component({
   selector: 'app-ingredients',
@@ -20,7 +20,7 @@ export class IngredientsComponent implements OnInit {
 
 
   addIngredient(name: HTMLInputElement){
-  	let ingredient : Ingredient = { id: this.id++, name : name.value, price : 0, stock: 0}
+    let  ingredient = new Ingredient(this.id++, name.value);
   	this.ingredients.push(ingredient);
     name.value=''; // clear field 
   }

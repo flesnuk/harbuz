@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Ingredient } from '../models/ingredient.interface';
+import { Ingredient } from '../models/ingredient.class';
 
 @Component({
   selector: 'app-ingredient',
@@ -13,9 +13,6 @@ export class IngredientComponent implements OnInit {
 	}
 
   ngOnInit() {
-  }
-
-  ngDoCheck(){
   }
 
 }

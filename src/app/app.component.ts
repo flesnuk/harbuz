@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ingredient } from './models/ingredient.interface';
+import { Ingredient } from './models/ingredient.class';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,6 @@ export class AppComponent {
   ingredients: Ingredient[];
 
   constructor () {
-  	this.ingredients = [{ id:0, name : "arroz", price : 4, stock: 5}, { id:1, name : "agua", price : 1, stock: 10}];
+  	this.ingredients = [new Ingredient(0, "arroz", 5), new Ingredient(1, "agua", 1)];
   }
 }
