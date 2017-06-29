@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ingredient, Euro } from './models/ingredient.class';
+import { Ingredient, Euro, EuroMassUnit, MassUnit } from './models/ingredient.class';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,9 @@ export class AppComponent {
   ingredients: Ingredient[];
 
   constructor () {
-  	this.ingredients = [new Ingredient(0, "arroz", new Euro(5)), new Ingredient(1, "agua", new Euro(4.5))];
+  	this.ingredients = [
+  		new Ingredient(0, "rice", new EuroMassUnit(MassUnit.g, new Euro("", 541))), 
+  		new Ingredient(1, "water", new EuroMassUnit(MassUnit.g, new Euro("", 124)))
+  	];
   }
 }
