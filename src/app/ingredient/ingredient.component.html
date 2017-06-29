@@ -1,6 +1,18 @@
 <div class="row" style="margin-top: 15px;">
 	<div class="col-sm-3">{{ingredient.name}}</div>
-	<div class="col-sm-3"><input type="number" [(ngModel)]="ingredient.price"></div>
-	<div class="col-sm-3"><input type="number" [(ngModel)]="ingredient.stock"></div>
-	<div class="col-sm-3"><ng-content></ng-content></div>
+	<div class="col-sm-3">
+		<input #price type="text" 
+		*ngIf="editMode" 
+		[ngModel]="ingredient.price.getPrice()" 
+		(ngModelChange)="ingredient.price.setPrice(price.value)">
+		<span *ngIf="!editMode"> {{ingredient.price.toString()}}</span>
+	</div>
+	<div class="col-sm-2"><input style="width: 5em;" type="number" [(ngModel)]="ingredient.stock"></div>
+	<div class="col-sm-2">
+		<button class="btn btn-primary btn-sm" (click)="editMode=!editMode" >
+			<span *ngIf="!editMode">Edit</span>
+			<span *ngIf="editMode">Save</span>
+		</button>
+	</div>
+	<div class="col-sm-2"><ng-content></ng-content></div>
 </div>

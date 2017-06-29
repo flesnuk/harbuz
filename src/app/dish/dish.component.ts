@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ingredient, IngredientQuantity } from '../models/ingredient.class';
+import { Ingredient, IngredientQuantity, Euro } from '../models/ingredient.class';
 import { Dish } from '../models/dish.class';
 
 @Component({
@@ -24,6 +24,12 @@ export class DishComponent implements OnInit {
   }
 
   increment() {this.dish.time.seconds++;}
+
+  costDish() { 
+    return this.dish.ingredientsUsed
+      .map(a => a.ingredient.price.valueOf() * a.quantity)
+      .reduce((a, b) => a + b, 0); 
+  }
 
 }
 

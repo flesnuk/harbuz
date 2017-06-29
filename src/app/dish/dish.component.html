@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 10px;">
 	<div class="col-sm-4"><b>Dish:</b> {{dish.name}} </div>
-	<div class="col-sm-4"><b>Time:</b> {{dish.time}} <button class="btn" (click)="increment()" >+</button></div>
+	<div class="col-sm-4"><b>Time:</b> {{dish.time.toString()}} <button class="btn" (click)="increment()" >+</button></div>
 	<div class="col-sm-4"><b>Active:</b> {{dish.active}} </div>
 
 </div>
@@ -15,13 +15,15 @@
 </div>
 <div *ngFor="let ingredientQuantity of dish.ingredientsUsed; let i = index;">
 
-	<div class="col-sm-4">{{ingredientQuantity.ingredient.name}}</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">{{ingredientQuantity.ingredient.name}}</div>
+	<div class="col-sm-3">
 		<input type="number" [(ngModel)]="ingredientQuantity.quantity" >
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">{{ingredientQuantity.ingredient.price * ingredientQuantity.quantity}}</div>
+	<div class="col-sm-3">
 		<button (click)="dish.ingredientsUsed.splice(i, 1)" class="btn btn-danger btn-sm">
 			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 		</button>
 	</div>
 </div>
+Total cost: {{costDish()}}

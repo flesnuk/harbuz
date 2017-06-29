@@ -8,6 +8,7 @@ import { Ingredient } from '../models/ingredient.class';
 })
 export class IngredientComponent implements OnInit {
 	@Input() ingredient : Ingredient
+	editMode: boolean = false
 
 	constructor(){
 	}
