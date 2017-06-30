@@ -12,10 +12,12 @@ export class DishComponent implements OnInit {
 	@Input() dish: Dish
 	@Input() ingredients: Ingredient[]
 	selectedIngredient : Ingredient
-  public massUnit : MassUnit
+  public massUnit : typeof MassUnit = MassUnit
+  keys : any[]
 
   constructor() {
-   }
+      this.keys = Object.keys(this.massUnit).filter(k => !isNaN(Number(k)));
+  }
 
   ngOnInit() {
   }
@@ -32,15 +34,6 @@ export class DishComponent implements OnInit {
       .reduce((a, b) => a.sum(b), new Euro()); 
   }
 
-  keys(): Array<string>{
-    var keys = Object.keys(MassUnit);
-    return keys.slice(keys.length / 2);
-  }
-
-  values() : Array<string>{
-    var keys = Object.keys(MassUnit);
-    return keys.slice(0, (keys.length / 2));
-  }
 
 }
 

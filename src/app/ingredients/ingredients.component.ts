@@ -8,11 +8,9 @@ import { Ingredient } from '../models/ingredient.class';
 })
 export class IngredientsComponent implements OnInit {
 	@Input() ingredients: Ingredient[]
-  id : number
 
 
   constructor() { 
-    this.id = 2;
   }
 
   ngOnInit() {
@@ -20,7 +18,7 @@ export class IngredientsComponent implements OnInit {
 
 
   addIngredient(name: HTMLInputElement){
-    let  ingredient = new Ingredient(this.id++, name.value);
+    let  ingredient = new Ingredient(name.value);
   	this.ingredients.push(ingredient);
     name.value=''; // clear field 
   }

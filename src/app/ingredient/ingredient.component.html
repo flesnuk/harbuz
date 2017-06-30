@@ -3,8 +3,8 @@
 	<div class="col-sm-3">
 		<input #price type="text" 
 		*ngIf="editMode" 
-		[ngModel]="ingredient.price.getPrice()" 
-		(ngModelChange)="ingredient.price.setPrice(price.value)">
+		[ngModel]="ingredient.price.price.getPrice()" 
+		(ngModelChange)="ingredient.price.price.setPrice(price.value)">
 		<span *ngIf="!editMode"> {{ingredient.price.toString()}}</span>
 	</div>
 	<div class="col-sm-2"><input style="width: 5em;" type="number" [(ngModel)]="ingredient.stock"></div>
