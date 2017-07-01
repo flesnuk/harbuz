@@ -7,12 +7,11 @@
 		(ngModelChange)="ingredient.price.price.setPrice(price.value)">
 		<span *ngIf="!editMode"> {{ingredient.price.toString()}}</span>
 	</div>
-	<div class="col-sm-2"><input style="width: 5em;" type="number" [(ngModel)]="ingredient.stock"></div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<button class="btn btn-primary btn-sm" (click)="editMode=!editMode" >
 			<span *ngIf="!editMode">Edit</span>
 			<span *ngIf="editMode">Save</span>
 		</button>
 	</div>
-	<div class="col-sm-2"><ng-content></ng-content></div>
+	<div class="col-sm-3"><ng-content></ng-content></div>
 </div>

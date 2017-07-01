@@ -1,42 +1,75 @@
+export type unitType = typeof MassUnit | typeof VolumeUnit
+
 export class Ingredient {
 	name: string
-	price: EuroMassUnit
-	stock: Mass
+	unitType: unitType
 
-	constructor( name: string, price?: EuroMassUnit, stock?: Mass){
+	constructor(name: string, unitType: unitType) {
 		this.name = name;
-		this.price = price == null ? new EuroMassUnit(MassUnit, MassUnit.mg) : price;
-		this.stock = stock == null ? new Mass() : stock;
+		this.unitType = unitType;
 	}
 }
 
-export class IngredientQuantity {
-	ingredient: Ingredient
-	quantity: Mass
+export class IngredientPrice extends Ingredient {
+	price: EuroUnit
 
-	constructor(ingredient: Ingredient, quantity?: Mass){
-		this.ingredient = ingredient;
-		this.quantity = quantity == null ? new Mass() : quantity;
+	constructor( name: string, price?: EuroUnit){
+		price = price == null ? new EuroMassUnit(null, MassUnit.mg) : price;
+		super(name, price.Unit);
+		this.price = price;
 	}
 }
 
-export class EuroMassUnit {
+export class IngredientQuantity extends Ingredient {
+	quantity: UnitsOfMeasurement
+
+	constructor(name: string, quantity: UnitsOfMeasurement){
+		super(name, quantity.Unit);
+		this.quantity = quantity;
+	}
+}
+
+/** 
+*	Euro with a stablished unit (euro/unit)
+*/
+abstract class EuroUnit {
 	price: Euro
 	unit: MassUnit | VolumeUnit
 	Unit: typeof MassUnit | typeof VolumeUnit
 
-	constructor (tipo: typeof MassUnit | typeof VolumeUnit ,unit: MassUnit |  VolumeUnit, price?: Euro) {
+	constructor(price: Euro, Unit: typeof MassUnit | typeof VolumeUnit ,unit: MassUnit |  VolumeUnit) {
 		this.price = price == null ? new Euro() : price;
+		this.Unit = Unit;
 		this.unit = unit;
-		this.Unit = tipo
 	}
 
-	mul(mass: Mass) : Euro{
-		return this.price.mul( mass.value * (mass.unit / this.unit) );
+	mul(physicalProp: UnitsOfMeasurement) : Euro{
+		return this.price.mul( physicalProp.value * (physicalProp.unit / this.unit) );
 	}
 
 	toString () {
 		return this.price.toString() + "/" + this.Unit[this.unit];
+	}
+}
+
+/** 
+*	Euro with a mass unit (euro/mass)
+*/
+export class EuroMassUnit extends  EuroUnit {
+
+	constructor (price: Euro, unit: MassUnit = MassUnit.mg) {
+		super(price, MassUnit, unit)
+	}
+
+}
+
+/** 
+*	Euro with a volume unit (euro/volume)
+*/
+export class EuroVolumeUnit extends  EuroUnit {
+
+	constructor (price: Euro, unit: VolumeUnit = VolumeUnit.mL) {
+		super(price, VolumeUnit, unit)
 	}
 
 }
@@ -54,24 +87,43 @@ export enum VolumeUnit {
 	kL = 1000 * L,
 }
 
-export class Mass {
-	unit: MassUnit
+abstract class UnitsOfMeasurement {
+	Unit: typeof MassUnit | typeof VolumeUnit
+	unit: MassUnit | VolumeUnit
 	value: number
 
-	constructor(unit? : MassUnit, value? : number) {
-		this.unit = unit == null ? MassUnit.mg : unit;
+	constructor(Unit: typeof MassUnit | typeof VolumeUnit, 
+				value?: number
+			){
+		this.Unit = Unit;
 		this.value = value | 0;
 	}
 
 	toString() {
-		return this.value + MassUnit[this.unit];
+		return this.value + this.Unit[this.unit];
 	}
 }
 
-enum EuroUnit {
-	CENTS = 1,
-	EURO = 100 * CENTS
+export class Mass extends UnitsOfMeasurement {
+
+	constructor(value? : number, unit? : MassUnit ) {
+		super(MassUnit, value);
+		this.unit = unit == null ? MassUnit.mg : unit;
+	}
+
 }
+
+export class Volume extends UnitsOfMeasurement {
+
+	constructor(value? : number, unit? : VolumeUnit ) {
+		super(VolumeUnit, value);
+		this.unit = unit == null ? VolumeUnit.mL : unit;
+	}
+
+}
+
+
+const CENTS_IN_EURO = 100;
 
 export class Euro {
 	price: number
@@ -95,7 +147,7 @@ export class Euro {
 		let priceString = priceFloat.toFixed(this.precision); // eg: 					"4.12" ,  "0.25",	 	"1.00"
 		
 		let [euro, cents] = priceString.split("."); // eg:				["4", "12"], ["0","25"],   ["1", "00"]
-		this.cents =  parseInt(euro) * EuroUnit.EURO;
+		this.cents =  parseInt(euro) * CENTS_IN_EURO;
 		this.cents += parseInt(cents);
 		
 	}
