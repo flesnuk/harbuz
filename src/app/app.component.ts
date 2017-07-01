@@ -10,9 +10,9 @@ export class AppComponent {
   ingredients: Ingredient[];
 
   constructor () {
-  	this.ingredients = [
-  		new IngredientPrice("rice", new EuroMassUnit(new Euro("", 541), MassUnit.g)), 
-  		new IngredientPrice("water", new EuroVolumeUnit(new Euro("", 124), VolumeUnit.mL ))
-  	];
+    this.ingredients = [
+      new IngredientPrice('rice', new EuroMassUnit(new Euro('', 541), MassUnit.g)),
+      new IngredientPrice('water', new EuroVolumeUnit(new Euro('', 124), VolumeUnit.mL ))
+    ];
   }
 }

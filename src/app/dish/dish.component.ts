@@ -9,11 +9,11 @@ import { Dish } from '../models/dish.class';
 })
 export class DishComponent implements OnInit {
 
-	@Input() dish: Dish
-	@Input() ingredients: Ingredient[]
-	selectedIngredient : Ingredient
-  
-  keys(unitType: unitType) : any[]{
+  @Input() dish: Dish
+  @Input() ingredients: Ingredient[]
+  selectedIngredient: Ingredient
+
+  keys(unitType: unitType): any[] {
     return Object.keys(unitType).filter(k => !isNaN(Number(k)));
   }
 
@@ -23,13 +23,13 @@ export class DishComponent implements OnInit {
   ngOnInit() {
   }
 
-  addIngredient(ingredient: Ingredient){
-  	this.dish.ingredientsUsed.push(new IngredientQuantity(ingredient.name, ingredient.unitType == MassUnit ? new Mass() : new Volume()));
+  addIngredient(ingredient: Ingredient) {
+    this.dish.ingredientsUsed.push(new IngredientQuantity(ingredient.name, ingredient.unitType === MassUnit ? new Mass() : new Volume()));
   }
 
-  increment() {this.dish.time.seconds++;}
+  increment() {this.dish.time.seconds++; }
 
-  costDish() { 
+  costDish() {
     return 0;
     /*return this.dish.ingredientsUsed
       .map(a => a.price.mul(a.quantity))

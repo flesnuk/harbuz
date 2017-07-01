@@ -1,5 +1,6 @@
+import { Mass } from './../models/ingredient.class';
 import { Component, OnInit, Input } from '@angular/core';
-import { Ingredient } from '../models/ingredient.class';
+import { Ingredient, MassUnit } from '../models/ingredient.class';
 
 @Component({
   selector: 'app-ingredients',
@@ -7,19 +8,19 @@ import { Ingredient } from '../models/ingredient.class';
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-	@Input() ingredients: Ingredient[]
+  @Input() ingredients: Ingredient[]
 
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {
   }
 
 
-  addIngredient(name: HTMLInputElement){
-    let  ingredient = new Ingredient(name.value);
-  	this.ingredients.push(ingredient);
-    name.value=''; // clear field 
+  addIngredient(name: HTMLInputElement) {
+    const ingredient = new Ingredient(name.value, MassUnit);
+    this.ingredients.push(ingredient);
+    name.value = ''; // clear field
   }
 }

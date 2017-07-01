@@ -7,11 +7,11 @@ import { Ingredient } from '../models/ingredient.class';
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
-	@Input() ingredient : Ingredient
-	editMode: boolean = false
+  @Input() ingredient: Ingredient
+  editMode = false
 
-	constructor(){
-	}
+  constructor() {
+  }
 
   ngOnInit() {
   }

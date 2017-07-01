@@ -8,18 +8,18 @@ import { Ingredient } from '../models/ingredient.class';
   styleUrls: ['./dishes.component.css']
 })
 export class DishesComponent implements OnInit {
-	dishes : Dish[]
-	@Input() ingredients: Ingredient 
+  dishes: Dish[]
+  @Input() ingredients: Ingredient
 
   constructor() {
-  	this.dishes = [];
+    this.dishes = [];
   }
 
   ngOnInit() {
   }
 
-  addDish(dishName: HTMLInputElement, dishMinutes: number, dishSeconds: number){
-  	this.dishes.push(new Dish(dishName.value, new Time(dishSeconds, dishMinutes)));
+  addDish(dishName: HTMLInputElement, dishMinutes: number, dishSeconds: number) {
+    this.dishes.push(new Dish(dishName.value, new Time(dishSeconds, dishMinutes)));
     dishName.value = ''; // clear dishName input
   }
 
