@@ -7,12 +7,12 @@ import { Ingredient, IngredientPrice, Euro, EuroMassUnit, EuroVolumeUnit, MassUn
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ingredients: IngredientPrice[];
+  ingredients: Ingredient[];
 
   constructor () {
     this.ingredients = [
-      new IngredientPrice('rice', new EuroMassUnit(new Euro('', 541), MassUnit.g)),
-      new IngredientPrice('water', new EuroVolumeUnit(new Euro('', 124), VolumeUnit.mL ))
+      new Ingredient('rice', MassUnit),
+      new Ingredient('water', VolumeUnit)
     ];
   }
 }

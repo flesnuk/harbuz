@@ -1,0 +1,11 @@
+<div class="col-sm-3">Name</div>
+<div class="col-sm-3">NBlocks</div>
+<div class="col-sm-3">Quantity</div>
+<div class="col-sm-3">Total</div>
+
+<div *ngFor="let ingr of ingredientStock">
+  <div class="col-sm-3">{{ingr.blockQuantity.name}} </div>
+  <div class="col-sm-3">{{ingr.nBlocks}} </div>
+  <div class="col-sm-3">{{ingr.blockQuantity.quantity}} </div>
+  <div class="col-sm-3">{{ingr.total()}} </div>
+</div>

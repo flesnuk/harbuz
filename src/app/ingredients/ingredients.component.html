@@ -6,8 +6,8 @@
 		<div class="col-sm-3"><b>Edit</b></div>
 		<div class="col-sm-3"><b>Delete</b></div>
 	</div>
-<app-ingredient *ngFor="let ingredient of ingredients; let i = index;" [ingredient]="ingredient">
-	<button (click)="ingredients.splice(i, 1)" class="btn btn-danger btn-sm">
+<app-ingredient *ngFor="let ingredient of ingredientPrices; let i = index;" [ingredient]="ingredient">
+	<button (click)="ingredientPrices.splice(i, 1)" class="btn btn-danger btn-sm">
 		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 	</button>
 </app-ingredient>

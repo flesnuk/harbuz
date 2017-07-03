@@ -1,4 +1,4 @@
-import { Mass } from './../models/ingredient.class';
+import { Mass, IngredientPrice, EuroMassUnit, Euro } from './../models/ingredient.class';
 import { Component, OnInit, Input } from '@angular/core';
 import { Ingredient, MassUnit } from '../models/ingredient.class';
 
@@ -9,12 +9,16 @@ import { Ingredient, MassUnit } from '../models/ingredient.class';
 })
 export class IngredientsComponent implements OnInit {
   @Input() ingredients: Ingredient[]
+  ingredientPrices: IngredientPrice[]
 
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.ingredientPrices = [];
+    this.ingredients.forEach(ingredient => {
+      this.ingredientPrices.push(new IngredientPrice(ingredient, new EuroMassUnit(new Euro('1.34'))))
+    });
   }
 
 

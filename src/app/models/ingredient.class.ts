@@ -13,9 +13,9 @@ export class Ingredient {
 export class IngredientPrice extends Ingredient {
     price: EuroUnit
 
-    constructor( name: string, price?: EuroUnit) {
+    constructor(ingredient: Ingredient, price?: EuroUnit) {
         price = price == null ? new EuroMassUnit(null, MassUnit.mg) : price;
-        super(name, price.Unit);
+        super(ingredient.name, price.Unit);
         this.price = price;
     }
 }
@@ -23,9 +23,23 @@ export class IngredientPrice extends Ingredient {
 export class IngredientQuantity extends Ingredient {
     quantity: UnitsOfMeasurement
 
-    constructor(name: string, quantity: UnitsOfMeasurement) {
-        super(name, quantity.Unit);
+    constructor(ingredient: Ingredient, quantity: UnitsOfMeasurement) {
+        super(ingredient.name, quantity.Unit);
         this.quantity = quantity;
+    }
+}
+
+export class IngredientQuantityBlock {
+    nBlocks: number
+    blockQuantity: IngredientQuantity
+
+    constructor(nBlocks: number, blockQuantity: IngredientQuantity) {
+        this.nBlocks = nBlocks;
+        this.blockQuantity = blockQuantity;
+    }
+
+    public total(): UnitsOfMeasurement {
+        return this.blockQuantity.quantity.mul(this.nBlocks);
     }
 }
 
@@ -99,25 +113,33 @@ abstract class UnitsOfMeasurement {
         this.value = value | 0;
     }
 
+    mul(multiplier: number): this {
+        const copy = new (this.constructor as any)();
+        copy.value = this.value * multiplier;
+        return copy;
+    }
+
     toString() {
         return this.value + this.Unit[this.unit];
     }
 }
 
 export class Mass extends UnitsOfMeasurement {
+    private DefaultUnit: MassUnit = MassUnit.mg;
 
     constructor(value?: number, unit?: MassUnit ) {
         super(MassUnit, value);
-        this.unit = unit == null ? MassUnit.mg : unit;
+        this.unit = unit == null ? this.DefaultUnit : unit;
     }
 
 }
 
 export class Volume extends UnitsOfMeasurement {
+    private DefaultUnit: VolumeUnit = VolumeUnit.mL;
 
     constructor(value?: number, unit?: VolumeUnit ) {
         super(VolumeUnit, value);
-        this.unit = unit == null ? VolumeUnit.mL : unit;
+        this.unit = unit == null ? this.DefaultUnit : unit;
     }
 
 }
@@ -137,7 +159,7 @@ export class Euro {
     });
 
     constructor (price: string = '0', centsOpt?: number) {
-        if (centsOpt != null) {
+        if (centsOpt != null) { // case for when is passed the exact amount in cents (used internally for avoiding parsing)
             this.cents = centsOpt;
             return;
         }
@@ -161,7 +183,7 @@ export class Euro {
     }
 
     sum(other: Euro): Euro {
-        return new Euro( '', this.cents + other.cents);
+        return new Euro('', this.cents + other.cents);
     }
 
     sub(other: Euro): Euro {
