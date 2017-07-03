@@ -7,7 +7,7 @@ import { Ingredient, IngredientPrice, Euro, EuroMassUnit, EuroVolumeUnit, MassUn
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ingredients: Ingredient[];
+  ingredients: IngredientPrice[];
 
   constructor () {
     this.ingredients = [
