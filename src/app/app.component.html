@@ -1,10 +1,19 @@
-<div class="container">
-<app-ingredients [ingredients]="ingredients"></app-ingredients>
-<hr>
-<br>
-<app-ingredient-stock [ingredients]="ingredients"></app-ingredient-stock>
-<hr>
-<br>
-<app-dishes [ingredients]="ingredients"></app-dishes>
-</div>
+<nav class="navbar navbar-default">
+  <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a routerLink="/" routerLinkActive="active">
+                <img alt="Brand" src="../favicon.ico">
+            </a></li>
+            <li><a routerLink="/stock" routerLinkActive="active">Stock</a></li>
+            <li><a routerLink="/ingredients" routerLinkActive="active">Ingredients</a></li>
+            <li><a routerLink="/dishes" routerLinkActive="active">Dishes</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a routerLink="/" routerLinkActive="active">Balance</a></li>
+        </ul>
+  </div>
+</nav>
 
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

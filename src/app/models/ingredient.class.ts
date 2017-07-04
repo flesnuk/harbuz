@@ -10,55 +10,69 @@ export class Ingredient {
     }
 }
 
-export class IngredientPrice extends Ingredient {
+export class IngredientPrice {
+    ingredient: Ingredient
     price: EuroUnit
 
     constructor(ingredient: Ingredient, price?: EuroUnit) {
         price = price == null ? new EuroMassUnit(null, MassUnit.mg) : price;
-        super(ingredient.name, price.Unit);
         this.price = price;
+        this.ingredient = ingredient;
     }
 }
 
-export class IngredientQuantity extends Ingredient {
+export class IngredientQuantity {
+    ingredient: Ingredient
     quantity: UnitsOfMeasurement
 
     constructor(ingredient: Ingredient, quantity: UnitsOfMeasurement) {
-        super(ingredient.name, quantity.Unit);
         this.quantity = quantity;
+        this.ingredient = ingredient;
     }
 }
 
 export class IngredientQuantityBlock {
     nBlocks: number
     blockQuantity: IngredientQuantity
+    price: Euro
 
-    constructor(nBlocks: number, blockQuantity: IngredientQuantity) {
+    /**
+     * @param nBlocks number of blocks
+     * @param blockQuantity quantity in each block
+     * @param price price of one block
+     */
+    constructor(nBlocks: number, blockQuantity: IngredientQuantity, price?: Euro) {
         this.nBlocks = nBlocks;
         this.blockQuantity = blockQuantity;
+        this.price = price;
     }
 
     public total(): UnitsOfMeasurement {
         return this.blockQuantity.quantity.mul(this.nBlocks);
+    }
+
+    public unitPrice(): EuroUnit {
+        const unitPrice = this.price.scale(1 / this.blockQuantity.quantity.value)
+        return new EuroUnit(unitPrice, this.blockQuantity.ingredient.unitType, this.blockQuantity.quantity.unit);
     }
 }
 
 /**
 *	Euro with a stablished unit (euro/unit)
 */
-abstract class EuroUnit {
+export class EuroUnit {
     price: Euro
     unit: MassUnit | VolumeUnit
-    Unit: typeof MassUnit | typeof VolumeUnit
+    Unit: unitType
 
-    constructor(price: Euro, Unit: typeof MassUnit | typeof VolumeUnit, unit: MassUnit |  VolumeUnit) {
+    constructor(price: Euro, Unit: unitType, unit: MassUnit |  VolumeUnit) {
         this.price = price == null ? new Euro() : price;
         this.Unit = Unit;
         this.unit = unit;
     }
 
     mul(physicalProp: UnitsOfMeasurement): Euro {
-        return this.price.mul( physicalProp.value * (physicalProp.unit / this.unit) );
+        return this.price.scale( physicalProp.value * (physicalProp.unit / this.unit) );
     }
 
     toString () {
@@ -175,10 +189,12 @@ export class Euro {
     }
 
     setPrice(priceString: string = '0') {
+        console.log('set');
         this.constructor(priceString);
     }
 
     getPrice(): string {
+        console.log('get');
         return (this.cents / 100 ).toString();
     }
 
@@ -190,7 +206,7 @@ export class Euro {
         return new Euro('', this.cents - other.cents);
     }
 
-    mul(mult: number): Euro {
+    scale(mult: number): Euro {
         return new Euro('', this.cents * mult);
     }
 

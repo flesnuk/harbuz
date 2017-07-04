@@ -1,6 +1,8 @@
+import { IngredientService } from './ingredient.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { IngredientComponent } from './ingredient/ingredient.component';
@@ -8,6 +10,13 @@ import { DishComponent } from './dish/dish.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { IngredientStockComponent } from './ingredient-stock/ingredient-stock.component';
+
+const appRoutes: Routes = [
+  { path: 'stock', component: IngredientStockComponent },
+  { path: 'ingredients', component: IngredientsComponent},
+  { path: 'dishes', component: DishesComponent}
+];
+
 
 @NgModule({
   declarations: [
@@ -19,9 +28,13 @@ import { IngredientStockComponent } from './ingredient-stock/ingredient-stock.co
     IngredientStockComponent,
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // debugging purposes only
+    )
   ],
-  providers: [],
+  providers: [IngredientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

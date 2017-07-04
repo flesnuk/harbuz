@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Ingredient, unitType, IngredientPrice } from './../models/ingredient.class';
+import { Ingredient, unitType, IngredientPrice, EuroUnit } from './../models/ingredient.class';
 
 @Component({
   selector: 'app-ingredient',
@@ -7,13 +7,17 @@ import { Ingredient, unitType, IngredientPrice } from './../models/ingredient.cl
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
-  @Input() ingredient: IngredientPrice
+  @Input() ingredientPrice: IngredientPrice
+  ingredient: Ingredient
+  price: EuroUnit
   editMode = false
 
   constructor() {
   }
 
   ngOnInit() {
+    this.ingredient = this.ingredientPrice.ingredient;
+    this.price = this.ingredientPrice.price;
   }
 
   keys(unitType: unitType): any[] {

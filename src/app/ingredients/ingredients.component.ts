@@ -1,6 +1,7 @@
-import { Mass, IngredientPrice, EuroMassUnit, Euro } from './../models/ingredient.class';
 import { Component, OnInit, Input } from '@angular/core';
-import { Ingredient, MassUnit } from '../models/ingredient.class';
+
+import { IngredientService } from './../ingredient.service';
+import { Mass, IngredientPrice, Ingredient, MassUnit, VolumeUnit } from './../models/ingredient.class';
 
 @Component({
   selector: 'app-ingredients',
@@ -8,23 +9,21 @@ import { Ingredient, MassUnit } from '../models/ingredient.class';
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-  @Input() ingredients: Ingredient[]
+  ingredients: Ingredient[]
   ingredientPrices: IngredientPrice[]
 
 
-  constructor() {}
+  constructor(private ingredientService: IngredientService) {}
 
   ngOnInit() {
-    this.ingredientPrices = [];
-    this.ingredients.forEach(ingredient => {
-      this.ingredientPrices.push(new IngredientPrice(ingredient, new EuroMassUnit(new Euro('1.34'))))
-    });
+    this.ingredients = this.ingredientService.getIngredients();
+    this.ingredientPrices = this.ingredientService.getIngredientPrices();
   }
 
 
   addIngredient(name: HTMLInputElement) {
     const ingredient = new Ingredient(name.value, MassUnit);
-    this.ingredients.push(ingredient);
+    this.ingredientService.addIngredient(ingredient);
     name.value = ''; // clear field
   }
 }

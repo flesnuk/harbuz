@@ -10,9 +10,5 @@ export class AppComponent {
   ingredients: Ingredient[];
 
   constructor () {
-    this.ingredients = [
-      new Ingredient('rice', MassUnit),
-      new Ingredient('water', VolumeUnit)
-    ];
   }
 }

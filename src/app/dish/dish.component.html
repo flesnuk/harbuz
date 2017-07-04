@@ -13,18 +13,20 @@
 	</div>
 	<button class="btn btn-primary" (click)="addIngredient(selectedIngredient)">Add ingredient</button>
 </div>
-<div *ngFor="let ingredientQuantity of dish.ingredientsUsed; let i = index;">
+<div *ngFor="let ingredientQuantity of ingredientsUsed; let i = index;">
 
-	<div class="col-sm-4">{{ingredientQuantity.name}}</div>
+	<div class="col-sm-4">{{ingredientQuantity.ingredient.name}}</div>
 	<div class="col-sm-4">
 		<input type="number" style="width: 5em;" [(ngModel)]="ingredientQuantity.quantity.value" > 
 		<select [(ngModel)]="ingredientQuantity.quantity.unit">
-			<option *ngFor="let key of keys(ingredientQuantity.unitType)" [value]="key">{{ingredientQuantity.unitType[key]}} </option>
+			<option *ngFor="let key of keys(ingredientQuantity.ingredient.unitType)" [value]="key">
+				{{ingredientQuantity.ingredient.unitType[key]}} 
+			</option>
 		</select>
 	</div>
 	<!--<div class="col-sm-3">{{ingredientQuantity.ingredient.price.mul(ingredientQuantity.quantity)}}</div>-->
 	<div class="col-sm-4">
-		<button (click)="dish.ingredientsUsed.splice(i, 1)" class="btn btn-danger btn-sm">
+		<button (click)="ingredientsUsed.splice(i, 1)" class="btn btn-danger btn-sm">
 			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 		</button>
 	</div>

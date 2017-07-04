@@ -7,18 +7,18 @@
 	</div>
 	<div class="col-sm-3">
 		<span *ngIf="editMode">
-			<input
+			<input #priceInput
 			style="width: 5em;"
 			type="text" 
 			*ngIf="editMode" 
-			[ngModel]="ingredient.price.price.getPrice()" 
-			(ngModelChange)="ingredient.price.price.setPrice(price.value)">
+			[ngModel]="price.price.getPrice()" 
+			(ngModelChange)="price.price.setPrice(priceInput.value)">
 			<span>/</span>
-			<select [(ngModel)]="ingredient.price.unit">
+			<select [(ngModel)]="price.unit">
 				<option *ngFor="let key of keys(ingredient.unitType)" [value]="key">{{ingredient.unitType[key]}} </option>
 			</select>
 		</span>
-		<span *ngIf="!editMode"> {{ingredient.price.toString()}}</span>
+		<span *ngIf="!editMode"> {{price.toString()}}</span>
 	</div>
 	<div class="col-sm-3">
 		<button class="btn btn-primary btn-sm" (click)="editMode=!editMode" >

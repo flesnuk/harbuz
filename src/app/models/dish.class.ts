@@ -8,7 +8,7 @@ export class Dish {
     thermalEnergy: ThermalEnergy
     ingredientsUsed: IngredientQuantity[]
 
-    constructor(name: string, time: Time, thermalEnergy?: number, active: boolean = true){
+    constructor(name: string, time: Time, thermalEnergy?: number, active: boolean = true) {
         this.name = name;
         this.time = time;
         this.thermalEnergy = new ThermalEnergy(thermalEnergy | 0);

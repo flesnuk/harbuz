@@ -1,11 +1,15 @@
-<div class="col-sm-3">Name</div>
-<div class="col-sm-3">NBlocks</div>
-<div class="col-sm-3">Quantity</div>
-<div class="col-sm-3">Total</div>
+<div class="col-sm-2">Name</div>
+<div class="col-sm-2">NBlocks</div>
+<div class="col-sm-2">Quantity</div>
+<div class="col-sm-2">Total</div>
+<div class="col-sm-2">Price</div>
+<div class="col-sm-2">Unit price</div>
 
 <div *ngFor="let ingr of ingredientStock">
-  <div class="col-sm-3">{{ingr.blockQuantity.name}} </div>
-  <div class="col-sm-3">{{ingr.nBlocks}} </div>
-  <div class="col-sm-3">{{ingr.blockQuantity.quantity}} </div>
-  <div class="col-sm-3">{{ingr.total()}} </div>
+  <div class="col-sm-2">{{ingr.blockQuantity.ingredient.name}} </div>
+  <div class="col-sm-2">{{ingr.nBlocks}} </div>
+  <div class="col-sm-2">{{ingr.blockQuantity.quantity}} </div>
+  <div class="col-sm-2">{{ingr.total()}} </div>
+  <div class="col-sm-2">{{ingr.price}} </div>
+  <div class="col-sm-2">{{ingr.unitPrice()}} </div>
 </div>
