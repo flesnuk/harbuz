@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Ingredient, IngredientPrice, Euro, EuroMassUnit, EuroVolumeUnit, MassUnit, VolumeUnit } from './models/ingredient.class';
+import { Ingredient } from './models/ingredient.class';
 
 @Component({
   selector: 'app-root',

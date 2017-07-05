@@ -1,6 +1,7 @@
+import { Injectable } from '@angular/core';
+
 import { Dish } from '../models/dish.class';
 import { Ingredient, IngredientPrice } from '../models/ingredient.class';
-import { Injectable } from '@angular/core';
 import {Euro} from '../models/euro.class'
 import {VolumeUnit, MassUnit} from '../models/unit.class';
 import {EuroMassUnit, EuroVolumeUnit} from '../models/eurounit.class';

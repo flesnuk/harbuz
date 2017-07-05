@@ -11,7 +11,7 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { IngredientShopComponent } from './ingredient-shop/ingredient-shop.component';
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: 'shop', component: IngredientShopComponent },
   { path: 'ingredients', component: IngredientsComponent},
   { path: 'dishes', component: DishesComponent}
