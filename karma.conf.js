@@ -10,8 +10,17 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
-      require('@angular/cli/plugins/karma')
+      require('@angular/cli/plugins/karma'),
+      require('karma-coverage')
     ],
+    preprocessors: { 'dist/**/!(*spec).js': ['coverage'] },
+    coverageReporter: {
+      dir : 'coverage/',
+      reporters: [
+        { type: 'html' },
+        { type: 'lcov' }
+      ]
+    },
     client:{
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
