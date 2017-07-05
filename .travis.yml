@@ -15,7 +15,7 @@ before_script:
   - ng build
   
 script:
-  - ng test --watch false
+  - ng test --watch false --code-coverage
 
 install:
   - npm install
