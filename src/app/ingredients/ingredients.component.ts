@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { IngredientService } from './../ingredient.service';
-import { Mass, IngredientPrice, Ingredient, MassUnit, VolumeUnit } from './../models/ingredient.class';
+import { IngredientService } from '../shared/ingredient.service';
+import { IngredientPrice, Ingredient } from '../models/ingredient.class';
+import {MassUnit} from '../models/unit.class';
 
 @Component({
   selector: 'app-ingredients',
@@ -9,8 +10,8 @@ import { Mass, IngredientPrice, Ingredient, MassUnit, VolumeUnit } from './../mo
   styleUrls: ['./ingredients.component.css']
 })
 export class IngredientsComponent implements OnInit {
-  ingredients: Ingredient[]
-  ingredientPrices: IngredientPrice[]
+  ingredients: Ingredient[];
+  ingredientPrices: IngredientPrice[];
 
 
   constructor(private ingredientService: IngredientService) {}

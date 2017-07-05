@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Ingredient, unitType, IngredientPrice, EuroUnit } from './../models/ingredient.class';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Ingredient, IngredientPrice } from '../models/ingredient.class';
+import {EuroUnit} from '../models/eurounit.class';
+import {unitType} from '../models/unit.class';
 
 @Component({
   selector: 'app-ingredient',
@@ -7,10 +10,10 @@ import { Ingredient, unitType, IngredientPrice, EuroUnit } from './../models/ing
   styleUrls: ['./ingredient.component.css']
 })
 export class IngredientComponent implements OnInit {
-  @Input() ingredientPrice: IngredientPrice
-  ingredient: Ingredient
-  price: EuroUnit
-  editMode = false
+  @Input() ingredientPrice: IngredientPrice;
+  ingredient: Ingredient;
+  price: EuroUnit;
+  editMode = false;
 
   constructor() {
   }

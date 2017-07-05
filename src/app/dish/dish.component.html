@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-lg-2">
 		<select class="form-control" [(ngModel)]="selectedIngredient">
-			<option *ngFor="let ingredient of ingredients" [ngValue]="ingredient"> {{ingredient.name}} </option>	
+			<option *ngFor="let ingredient of ingredients" [ngValue]="ingredient"> {{ingredient.name}} </option>
 		</select>
 	</div>
 	<button class="btn btn-primary" (click)="addIngredient(selectedIngredient)">Add ingredient</button>
@@ -17,18 +17,16 @@
 
 	<div class="col-sm-4">{{ingredientQuantity.ingredient.name}}</div>
 	<div class="col-sm-4">
-		<input type="number" style="width: 5em;" [(ngModel)]="ingredientQuantity.quantity.value" > 
+		<input type="number" style="width: 5em;" [(ngModel)]="ingredientQuantity.quantity.value" >
 		<select [(ngModel)]="ingredientQuantity.quantity.unit">
 			<option *ngFor="let key of keys(ingredientQuantity.ingredient.unitType)" [value]="key">
-				{{ingredientQuantity.ingredient.unitType[key]}} 
+				{{ingredientQuantity.ingredient.unitType[key]}}
 			</option>
 		</select>
 	</div>
-	<!--<div class="col-sm-3">{{ingredientQuantity.ingredient.price.mul(ingredientQuantity.quantity)}}</div>-->
 	<div class="col-sm-4">
 		<button (click)="ingredientsUsed.splice(i, 1)" class="btn btn-danger btn-sm">
 			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 		</button>
 	</div>
 </div>
-Total cost: {{costDish()}}

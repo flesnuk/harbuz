@@ -1,4 +1,4 @@
-import { IngredientService } from './ingredient.service';
+import { IngredientService } from './shared/ingredient.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,10 +9,10 @@ import { IngredientComponent } from './ingredient/ingredient.component';
 import { DishComponent } from './dish/dish.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { DishesComponent } from './dishes/dishes.component';
-import { IngredientStockComponent } from './ingredient-stock/ingredient-stock.component';
+import { IngredientShopComponent } from './ingredient-shop/ingredient-shop.component';
 
 const appRoutes: Routes = [
-  { path: 'stock', component: IngredientStockComponent },
+  { path: 'shop', component: IngredientShopComponent },
   { path: 'ingredients', component: IngredientsComponent},
   { path: 'dishes', component: DishesComponent}
 ];
@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     DishComponent,
     IngredientsComponent,
     DishesComponent,
-    IngredientStockComponent,
+    IngredientShopComponent,
   ],
   imports: [
     BrowserModule, FormsModule,

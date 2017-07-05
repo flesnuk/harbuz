@@ -1,7 +1,8 @@
-import { IngredientService } from './../ingredient.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { IngredientService } from '../shared/ingredient.service';
 import { Dish, Time } from '../models/dish.class';
-import { Ingredient, MassUnit, VolumeUnit } from '../models/ingredient.class';
+import { Ingredient } from '../models/ingredient.class';
 
 @Component({
   selector: 'app-dishes',
@@ -9,8 +10,8 @@ import { Ingredient, MassUnit, VolumeUnit } from '../models/ingredient.class';
   styleUrls: ['./dishes.component.css']
 })
 export class DishesComponent implements OnInit {
-  dishes: Dish[]
-  ingredients: Ingredient[]
+  dishes: Dish[];
+  ingredients: Ingredient[];
 
   constructor(private ingredientService: IngredientService) {
     this.dishes = ingredientService.getDishes();
