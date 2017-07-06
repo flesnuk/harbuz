@@ -28,4 +28,9 @@ export class IngredientsComponent implements OnInit {
     this.ingredientService.addIngredient(ingredient);
     name.value = ''; // clear field
   }
+
+  keys() {
+    return Array.from(this.ingredientQuantities.keys())
+  }
+
 }

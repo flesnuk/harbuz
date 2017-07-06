@@ -75,4 +75,17 @@ export class IngredientService implements OnInit {
     this.dishes.push(dish);
   }
 
+  public canCook(dish: Dish): boolean {
+    return !dish.ingredientsUsed.some( ingredientQuantity => {
+      return (  ingredientQuantity.quantity.gt(this.ingredientQuantities.get(ingredientQuantity.ingredient).quantity) );
+    });
+  }
+
+  public cook(dish: Dish) {
+    dish.ingredientsUsed.forEach ( ingredientQuantity => {
+      this.ingredientQuantities.get(ingredientQuantity.ingredient).quantity.subMutable(ingredientQuantity.quantity);
+    });
+    console.log('COOKED!')
+  }
+
 }

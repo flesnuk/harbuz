@@ -4,7 +4,7 @@
 		<div class="col-sm-6"><b>Name</b></div>
 		<div class="col-sm-6"><b>Quantity</b></div>
 	</div>
-<div *ngFor="let ingredient of ingredientQuantities.keys(); let i = index;">
+<div *ngFor="let ingredient of keys(); let i = index;">
 	<div class="row" style="margin-top: 15px;">
 		<div class="col-sm-6">{{ingredient.name}} </div>
 		<div class="col-sm-6">{{ingredientQuantities.get(ingredient).quantity}} </div>

@@ -39,6 +39,22 @@ export class UnitsOfMeasurement {
     return copy;
   }
 
+  sub(other: UnitsOfMeasurement): UnitsOfMeasurement {
+    const copy = new (this.constructor as any)();
+    copy.value = this.value - other.value * (other.unit / this.unit);
+    copy.beautify();
+    return copy;
+  }
+
+  subMutable(other: UnitsOfMeasurement) {
+    this.value = this.value - other.value * (other.unit / this.unit);
+    this.beautify();
+  }
+
+  gt(other: UnitsOfMeasurement): boolean {
+    return this.value * this.unit > other.value * other.unit;
+  }
+
   /**
    * Avoid reaching numbers higher than 1000
    */

@@ -1,7 +1,8 @@
 <div class="row" style="margin-bottom: 10px;">
-	<div class="col-sm-4"><b>Dish:</b> {{dish.name}} </div>
-	<div class="col-sm-4"><b>Time:</b> {{dish.time.toString()}} <button class="btn" (click)="increment()" >+</button></div>
-	<div class="col-sm-4"><b>Active:</b> {{dish.active}} </div>
+	<div class="col-sm-3"><b>Dish:</b> {{dish.name}} </div>
+	<div class="col-sm-3"><b>Time:</b> {{dish.time.toString()}} <button class="btn" (click)="increment()" >+</button></div>
+	<div class="col-sm-3"><b>Active:</b> {{dish.active}} </div>
+	<div class="col-sm-3"><button class="btn" (click)="cook()">Cook</button></div>
 
 </div>
 

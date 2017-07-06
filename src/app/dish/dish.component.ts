@@ -1,3 +1,4 @@
+import { IngredientService } from './../shared/ingredient.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Ingredient, IngredientQuantity } from '../models/ingredient.class';
@@ -20,7 +21,7 @@ export class DishComponent implements OnInit {
     return Object.keys(unitType).filter(k => !isNaN(Number(k)));
   }
 
-  constructor() {
+  constructor(private ingredientService: IngredientService) {
   }
 
   ngOnInit() {
@@ -32,5 +33,17 @@ export class DishComponent implements OnInit {
   }
 
   increment() {this.dish.time.seconds++; }
+
+  canCook() {
+    return this.ingredientService.canCook(this.dish);
+  }
+
+  cook() {
+    if ( this.canCook() ) {
+      this.ingredientService.cook(this.dish);
+    } else {
+      alert('Not enough ingredients on stock')
+    }
+  }
 }
 
