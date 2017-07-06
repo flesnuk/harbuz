@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IngredientShopComponent } from './ingredient-shop.component';
-import {DishesComponent} from "../dishes/dishes.component";
-import {IngredientsComponent} from "../ingredients/ingredients.component";
-import {DishComponent} from "../dish/dish.component";
-import {IngredientComponent} from "../ingredient/ingredient.component";
-import {FormsModule} from "@angular/forms";
-import {appRoutes} from "../app.module";
-import {RouterTestingModule} from "@angular/router/testing";
-import {IngredientService} from "../shared/ingredient.service";
+import {DishesComponent} from '../dishes/dishes.component';
+import {IngredientsComponent} from '../ingredients/ingredients.component';
+import {DishComponent} from '../dish/dish.component';
+import {IngredientComponent} from '../ingredient/ingredient.component';
+import {FormsModule} from '@angular/forms';
+import {appRoutes} from '../app.module';
+import {RouterTestingModule} from '@angular/router/testing';
+import {IngredientService} from '../shared/ingredient.service';
 
 describe('IngredientShopComponent', () => {
   let component: IngredientShopComponent;

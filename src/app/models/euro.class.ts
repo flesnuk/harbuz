@@ -28,12 +28,10 @@ export class Euro {
   }
 
   setPrice(priceString: string = '0') {
-    console.log('set');
     this.constructor(priceString);
   }
 
   getPrice(): string {
-    console.log('get');
     return (this.cents / 100 ).toString();
   }
 

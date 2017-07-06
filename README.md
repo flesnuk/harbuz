@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/flesnuk/harbuz.svg?branch=master)](https://travis-ci.org/flesnuk/harbuz)
+[![Coverage Status](https://coveralls.io/repos/github/flesnuk/harbuz/badge.svg?branch=master)](https://coveralls.io/github/flesnuk/harbuz?branch=master)
 
 # Harbuz :watermelon:
 
