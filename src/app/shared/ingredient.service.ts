@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Dish } from '../models/dish.class';
-import { Ingredient, IngredientPrice } from '../models/ingredient.class';
-import {Euro} from '../models/euro.class'
-import {VolumeUnit, MassUnit} from '../models/unit.class';
-import {EuroMassUnit, EuroVolumeUnit} from '../models/eurounit.class';
+import { Euro } from '../models/euro.class';
+import { EuroMassUnit, EuroVolumeUnit } from '../models/eurounit.class';
+import {IngredientQuantityBlock, Ingredient,  IngredientPrice,  IngredientQuantity} from '../models/ingredient.class';
+import { MassUnit, VolumeUnit } from '../models/unit.class';
 
 @Injectable()
-export class IngredientService {
+export class IngredientService implements OnInit {
   ingredients: Ingredient[] = [
       new Ingredient('rice', MassUnit),
       new Ingredient('water', VolumeUnit)
@@ -18,9 +20,16 @@ export class IngredientService {
     new IngredientPrice(this.ingredients[1], new EuroVolumeUnit(new Euro('2.50')))
   ];
 
+  ingredientQuantities: IngredientQuantity[] = [];
+
   dishes: Dish[] = [];
 
+  money: Euro = new Euro('100');
+  private subject = new BehaviorSubject<Euro>(this.money);
+
   constructor() {}
+
+  ngOnInit() {}
 
   public getIngredients(): Ingredient[] {
     return this.ingredients;
@@ -32,6 +41,20 @@ export class IngredientService {
 
   public getIngredientPrices(): IngredientPrice[] {
     return this.ingredientPrices;
+  }
+
+  public getIngredientQuantities(): IngredientQuantity[] {
+    return this.ingredientQuantities;
+  }
+
+  public buyIngredientQuantity(ingredient: IngredientQuantityBlock) {
+    this.ingredientQuantities.push(ingredient.blockQuantity);
+    this.money = this.money.sub(ingredient.price);
+    this.subject.next(this.money);
+  }
+
+  public getBalance(): Observable<Euro> {
+    return this.subject.asObservable();
   }
 
   public getDishes(): Dish[] {

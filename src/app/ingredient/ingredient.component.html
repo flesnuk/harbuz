@@ -18,7 +18,7 @@
 				<option *ngFor="let key of keys(ingredient.unitType)" [value]="key">{{ingredient.unitType[key]}} </option>
 			</select>
 		</span>
-		<span *ngIf="!editMode"> {{price.toString()}}</span>
+		<span *ngIf="!editMode"> {{price}}</span>
 	</div>
 	<div class="col-sm-3">
 		<button class="btn btn-primary btn-sm" (click)="editMode=!editMode" >

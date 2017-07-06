@@ -2,10 +2,32 @@
   <div class="shop-ingredient" *ngFor="let ingr of ingredientStock">
     <div>
       <span class="shop-ingredient-name">{{ingr.blockQuantity.ingredient.name}} </span>
-      <span class="shop-ingredient-quantity"> ({{ingr.blockQuantity.quantity}}) </span>
+      <span class="shop-ingredient-quantity" *ngIf="!editQuantity" (click)="editQuantity=!editQuantity"> 
+        ({{ingr.blockQuantity.quantity}}) 
+      </span>
+      <span *ngIf="editQuantity">
+        <input type="number" style="width: 5em;" [(ngModel)]="ingr.blockQuantity.quantity.value" (keyup.enter)="editQuantity=!editQuantity">
+        <select [(ngModel)]="ingr.blockQuantity.quantity.unit">
+          <option *ngFor="let key of keys(ingr.blockQuantity.quantity.Unit)" [value]="key">
+            {{ingr.blockQuantity.quantity.Unit[key]}} 
+          </option>
+			</select>
+      </span>
+
     </div>
     
-    <span class="shop-ingredient-price">{{ingr.price}}<button class="buy-button">Buy</button> </span>
+    <span class="shop-ingredient-price" *ngIf="!editPrice" (click)="editPrice=!editPrice" >
+      {{ingr.price}}
+    </span>
+    <button (click)="buy(ingr)" class="buy-button">Buy</button> 
+    <span *ngIf="editPrice">
+      <input #priceInput (keyup.enter)="editPrice=!editPrice"
+			style="width: 4em;"
+			type="text" 
+			*ngIf="editPrice" 
+			[ngModel]="ingr.price.getPrice()" 
+			(ngModelChange)="ingr.price.setPrice(priceInput.value)">
+    </span>
     
     <div class="shop-ingredient-price-unit">{{ingr.unitPrice()}} </div>
   </div>
