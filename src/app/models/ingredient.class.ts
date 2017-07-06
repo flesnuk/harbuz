@@ -32,6 +32,10 @@ export class IngredientQuantity {
         this.quantity = quantity;
         this.ingredient = ingredient;
     }
+
+    sum(other: IngredientQuantity): IngredientQuantity {
+        return new IngredientQuantity(this.ingredient, this.quantity.sum(other.quantity));
+    }
 }
 
 export class IngredientQuantityBlock {

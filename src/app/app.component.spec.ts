@@ -1,3 +1,4 @@
+import { IngredientService } from './shared/ingredient.service';
 import { TestBed, async } from '@angular/core/testing';
 
 import { RouterTestingModule } from '@angular/router/testing'
@@ -27,7 +28,8 @@ describe('AppComponent', () => {
           appRoutes
         ),
         FormsModule
-      ]
+      ],
+      providers: [IngredientService]
     }).compileComponents();
   }));
 

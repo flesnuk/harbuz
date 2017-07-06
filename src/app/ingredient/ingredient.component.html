@@ -1,30 +1,4 @@
 <div class="row" style="margin-top: 15px;">
-	<div class="col-sm-3">
-		<input type="text" 
-		*ngIf="editMode" 
-		[(ngModel)]="ingredient.name">
-		<span *ngIf="!editMode"> {{ingredient.name}}</span>
-	</div>
-	<div class="col-sm-3">
-		<span *ngIf="editMode">
-			<input #priceInput
-			style="width: 5em;"
-			type="text" 
-			*ngIf="editMode" 
-			[ngModel]="price.price.getPrice()" 
-			(ngModelChange)="price.price.setPrice(priceInput.value)">
-			<span>/</span>
-			<select [(ngModel)]="price.unit">
-				<option *ngFor="let key of keys(ingredient.unitType)" [value]="key">{{ingredient.unitType[key]}} </option>
-			</select>
-		</span>
-		<span *ngIf="!editMode"> {{price}}</span>
-	</div>
-	<div class="col-sm-3">
-		<button class="btn btn-primary btn-sm" (click)="editMode=!editMode" >
-			<span *ngIf="!editMode">Edit</span>
-			<span *ngIf="editMode">Save</span>
-		</button>
-	</div>
-	<div class="col-sm-3"><ng-content></ng-content></div>
+	<div class="col-sm-6">{{ingredientQuantity.ingredient.name}} </div>
+	<div class="col-sm-6">{{ingredientQuantity.quantity}} </div>
 </div>

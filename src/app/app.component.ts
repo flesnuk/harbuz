@@ -16,6 +16,11 @@ export class AppComponent {
   subscription: Subscription;
 
   constructor (private ingredientService: IngredientService) {
-    this.subscription = this.ingredientService.getBalance().subscribe(money => { this.balance = money; });
+    this.subscription = this.ingredientService.getBalance().subscribe(op => {
+      this.balance = op.money;
+      if (!op.valid) {
+        alert('Not enough funds');
+      }
+    });
   }
 }

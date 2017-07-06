@@ -1,3 +1,4 @@
+import { IngredientQuantity } from './../models/ingredient.class';
 import { Component, OnInit } from '@angular/core';
 
 import { IngredientService } from '../shared/ingredient.service';
@@ -11,14 +12,14 @@ import {MassUnit} from '../models/unit.class';
 })
 export class IngredientsComponent implements OnInit {
   ingredients: Ingredient[];
-  ingredientPrices: IngredientPrice[];
+  ingredientQuantities: Map<Ingredient, IngredientQuantity>;
 
 
   constructor(private ingredientService: IngredientService) {}
 
   ngOnInit() {
     this.ingredients = this.ingredientService.getIngredients();
-    this.ingredientPrices = this.ingredientService.getIngredientPrices();
+    this.ingredientQuantities = this.ingredientService.getIngredientQuantities();
   }
 
 

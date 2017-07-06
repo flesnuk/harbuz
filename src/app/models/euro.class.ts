@@ -47,6 +47,10 @@ export class Euro {
     return new Euro('', this.cents * mult);
   }
 
+  lt(other: Euro): boolean {
+    return this.cents < other.cents;
+  }
+
   toString() {
 
     return this.formatter.format(this.cents / 100);

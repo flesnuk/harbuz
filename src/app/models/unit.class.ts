@@ -28,11 +28,38 @@ export class UnitsOfMeasurement {
   mul(multiplier: number): this {
     const copy = new (this.constructor as any)();
     copy.value = this.value * multiplier;
+    copy.beautify()
     return copy;
   }
 
+  sum(other: UnitsOfMeasurement): UnitsOfMeasurement {
+    const copy = new (this.constructor as any)();
+    copy.value = this.value * this.unit + other.value * other.unit;
+    copy.beautify();
+    return copy;
+  }
+
+  /**
+   * Avoid reaching numbers higher than 1000
+   */
+  beautify() {
+    let max = 1;
+    Object.keys(this.Unit).forEach(
+      function(k) {
+        if ( (!isNaN(Number(k)) && parseInt(k, 10) > max) ) {
+          max = parseInt(k, 10);
+        }
+    });
+
+    while (this.value >= 1000 && this.unit < max ) {
+      this.value /= 1000;
+      this.unit *= 1000;
+    }
+    this.value = parseFloat(this.value.toFixed(2));
+  }
+
   toString() {
-    return this.value + this.Unit[this.unit];
+    return this.value + ' ' + this.Unit[this.unit];
   }
 }
 

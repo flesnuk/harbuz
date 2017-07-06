@@ -1,13 +1,12 @@
 <input type="text" #ingredientName (keyup.enter)="addIngredient(ingredientName)">
 <button class="btn btn-primary" (click)="addIngredient(ingredientName)">Add ingredient</button>
 	<div class="row">
-		<div class="col-sm-3"><b>Name</b></div>
-		<div class="col-sm-3"><b>Price</b></div>
-		<div class="col-sm-3"><b>Edit</b></div>
-		<div class="col-sm-3"><b>Delete</b></div>
+		<div class="col-sm-6"><b>Name</b></div>
+		<div class="col-sm-6"><b>Quantity</b></div>
 	</div>
-<app-ingredient *ngFor="let ingredient of ingredientPrices; let i = index;" [ingredientPrice]="ingredient">
-	<button (click)="ingredientPrices.splice(i, 1)" class="btn btn-danger btn-sm">
-		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-	</button>
-</app-ingredient>
+<div *ngFor="let ingredient of ingredientQuantities.keys(); let i = index;">
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-sm-6">{{ingredient.name}} </div>
+		<div class="col-sm-6">{{ingredientQuantities.get(ingredient).quantity}} </div>
+	</div>
+</div>

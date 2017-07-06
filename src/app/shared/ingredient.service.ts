@@ -1,3 +1,4 @@
+import { Volume, Mass } from './../models/unit.class';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -5,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Dish } from '../models/dish.class';
 import { Euro } from '../models/euro.class';
 import { EuroMassUnit, EuroVolumeUnit } from '../models/eurounit.class';
-import {IngredientQuantityBlock, Ingredient,  IngredientPrice,  IngredientQuantity} from '../models/ingredient.class';
+import {Ingredient,  IngredientQuantityBlock,  IngredientQuantity} from '../models/ingredient.class';
 import { MassUnit, VolumeUnit } from '../models/unit.class';
 
 @Injectable()
@@ -15,17 +16,17 @@ export class IngredientService implements OnInit {
       new Ingredient('water', VolumeUnit)
   ];
 
-  ingredientPrices: IngredientPrice[] = [
-    new IngredientPrice(this.ingredients[0], new EuroMassUnit(new Euro('1.34'), MassUnit.g)),
-    new IngredientPrice(this.ingredients[1], new EuroVolumeUnit(new Euro('2.50')))
+  ingredientQuantitIngredientQuantityBlocks: IngredientQuantityBlock[] = [
+    new IngredientQuantityBlock(4, new IngredientQuantity(this.ingredients[0], new Mass(500, MassUnit.g)), new Euro('0.2')),
+    new IngredientQuantityBlock(4, new IngredientQuantity(this.ingredients[1], new Volume(1, VolumeUnit.L)), new Euro('0.64')),
   ];
 
-  ingredientQuantities: IngredientQuantity[] = [];
+  ingredientQuantities: Map<Ingredient, IngredientQuantity> = new Map();
 
   dishes: Dish[] = [];
 
   money: Euro = new Euro('100');
-  private subject = new BehaviorSubject<Euro>(this.money);
+  private subject = new BehaviorSubject<any>({money: this.money, valid: true});
 
   constructor() {}
 
@@ -39,21 +40,30 @@ export class IngredientService implements OnInit {
     this.ingredients.push(ingredient);
   }
 
-  public getIngredientPrices(): IngredientPrice[] {
-    return this.ingredientPrices;
+  public getIngredientQuantityBlocks(): IngredientQuantityBlock[] {
+    return this.ingredientQuantitIngredientQuantityBlocks;
   }
 
-  public getIngredientQuantities(): IngredientQuantity[] {
+  public getIngredientQuantities(): Map<Ingredient, IngredientQuantity> {
     return this.ingredientQuantities;
   }
 
   public buyIngredientQuantity(ingredient: IngredientQuantityBlock) {
-    this.ingredientQuantities.push(ingredient.blockQuantity);
-    this.money = this.money.sub(ingredient.price);
-    this.subject.next(this.money);
+    const ingredientObj = ingredient.blockQuantity.ingredient
+    if (this.ingredientQuantities.has(ingredientObj)) {
+      const prevQuantity = this.ingredientQuantities.get(ingredientObj);
+      this.ingredientQuantities.set(ingredientObj, prevQuantity.sum(ingredient.blockQuantity));
+    } else {
+      this.ingredientQuantities.set(ingredientObj, ingredient.blockQuantity);
+    }
+
+    const remainder = this.money.sub(ingredient.price);
+    const notValidOp = remainder.lt(new Euro('0'))
+    this.money = notValidOp ? this.money : remainder;
+    this.subject.next({money : this.money, valid: !notValidOp});
   }
 
-  public getBalance(): Observable<Euro> {
+  public getBalance(): Observable<any> {
     return this.subject.asObservable();
   }
 

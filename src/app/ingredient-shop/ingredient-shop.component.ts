@@ -20,10 +20,7 @@ export class IngredientShopComponent implements OnInit {
 
   ngOnInit() {
     this.ingredients = this.ingredientService.getIngredients();
-    this.ingredientStock = [];
-    this.ingredients.forEach(ingredient => {
-      this.ingredientStock.push(new IngredientQuantityBlock(4, new IngredientQuantity(ingredient, new Mass(5)), new Euro('4.')));
-    });
+    this.ingredientStock = this.ingredientService.getIngredientQuantityBlocks();
   }
 
   buy(ingr: IngredientQuantityBlock) {
