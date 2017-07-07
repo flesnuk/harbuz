@@ -19,16 +19,17 @@ export class UnitsOfMeasurement {
   value: number;
 
   constructor(Unit: typeof MassUnit | typeof VolumeUnit,
-              value?: number
+              value: number = 0
   ) {
     this.Unit = Unit;
-    this.value = value | 0;
+    this.value = value;
   }
 
   mul(multiplier: number): this {
     const copy = new (this.constructor as any)();
     copy.value = this.value * multiplier;
-    copy.beautify()
+    copy.unit = this.unit;
+    copy.beautify();
     return copy;
   }
 
@@ -42,6 +43,7 @@ export class UnitsOfMeasurement {
   sub(other: UnitsOfMeasurement): UnitsOfMeasurement {
     const copy = new (this.constructor as any)();
     copy.value = this.value - other.value * (other.unit / this.unit);
+    copy.unit = this.unit;
     copy.beautify();
     return copy;
   }
@@ -80,21 +82,19 @@ export class UnitsOfMeasurement {
 }
 
 export class Mass extends UnitsOfMeasurement {
-  private DefaultUnit: MassUnit = MassUnit.mg;
 
-  constructor(value?: number, unit?: MassUnit ) {
+  constructor(value?: number, unit: MassUnit = MassUnit.mg) {
     super(MassUnit, value);
-    this.unit = unit == null ? this.DefaultUnit : unit;
+    this.unit = unit;
   }
 
 }
 
 export class Volume extends UnitsOfMeasurement {
-  private DefaultUnit: VolumeUnit = VolumeUnit.mL;
 
-  constructor(value?: number, unit?: VolumeUnit ) {
+  constructor(value?: number, unit: VolumeUnit = VolumeUnit.mL ) {
     super(VolumeUnit, value);
-    this.unit = unit == null ? this.DefaultUnit : unit;
+    this.unit = unit;
   }
 
 }

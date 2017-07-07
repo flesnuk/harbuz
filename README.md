@@ -7,6 +7,13 @@
 npm install
 npm install -g @angular/cli
 ```
+### What I learned
+- Use of services with Subject/Observable pattern
+- Basic routing in angular
+- Basic use of Typescript classes and enums
+- Configure travis-ci and coverall for tests coverage
+- Basic Jasmine tests
+- Workaround for [iterating the keys of a map](https://github.com/flesnuk/harbuz/blob/8272736d595957b9dccc4d60b001ebac53e81839/src/app/ingredients/ingredients.component.ts#L33) in a component template until finding a better solution
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.3.
 
