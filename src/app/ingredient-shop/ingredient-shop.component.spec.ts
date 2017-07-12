@@ -14,7 +14,7 @@ describe('IngredientShopComponent', () => {
   let component: IngredientShopComponent;
   let fixture: ComponentFixture<IngredientShopComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ IngredientShopComponent,
         IngredientComponent,
@@ -30,8 +30,7 @@ describe('IngredientShopComponent', () => {
       ],
       providers: [IngredientService]
     })
-    .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(IngredientShopComponent);
@@ -39,7 +38,4 @@ describe('IngredientShopComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
 });
