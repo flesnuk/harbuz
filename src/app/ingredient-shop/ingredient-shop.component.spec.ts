@@ -38,4 +38,8 @@ describe('IngredientShopComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should be true', () => {
+    expect(true).toBe(true);
+  })
+
 });
