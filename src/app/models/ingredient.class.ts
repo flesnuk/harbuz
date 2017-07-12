@@ -48,7 +48,7 @@ export class IngredientQuantityBlock {
      * @param blockQuantity quantity in each block
      * @param price price of one block
      */
-    constructor(nBlocks: number, blockQuantity: IngredientQuantity, price?: Euro) {
+    constructor(nBlocks: number, blockQuantity: IngredientQuantity, price: Euro = new Euro()) {
         this.nBlocks = nBlocks;
         this.blockQuantity = blockQuantity;
         this.price = price;
