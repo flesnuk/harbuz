@@ -14,7 +14,7 @@ describe('IngredientShopComponent', () => {
   let component: IngredientShopComponent;
   let fixture: ComponentFixture<IngredientShopComponent>;
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ IngredientShopComponent,
         IngredientComponent,
@@ -29,17 +29,17 @@ describe('IngredientShopComponent', () => {
         FormsModule
       ],
       providers: [IngredientService]
-    })
-  });
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(IngredientShopComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+
+  }));
+
+
 
   it('should be true', () => {
-    expect(true).toBe(true);
+    expect(component).toBeTruthy();
   })
 
 });
