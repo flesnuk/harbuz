@@ -66,7 +66,12 @@ describe('DishComponent', () => {
     ingrService.buyIngredientQuantity(ingrBlock);
     component.cook();
     component.cook();
+    component.cook();
     expect(ingrService.getIngredientQuantities().get(ingredient).quantity.value).toBe(0);
+  })
+
+  it('should return keys', () => {
+    expect(component.keys(MassUnit)).toContain('1000');
   })
 
 });
