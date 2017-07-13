@@ -33,6 +33,7 @@ describe('IngredientShopComponent', () => {
 
     fixture = TestBed.createComponent(IngredientShopComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
 
   }));
 

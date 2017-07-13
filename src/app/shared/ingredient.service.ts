@@ -1,3 +1,4 @@
+import { Time } from './../models/dish.class';
 import { Volume, Mass } from './../models/unit.class';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -85,7 +86,6 @@ export class IngredientService implements OnInit {
     dish.ingredientsUsed.forEach ( ingredientQuantity => {
       this.ingredientQuantities.get(ingredientQuantity.ingredient).quantity.subMutable(ingredientQuantity.quantity);
     });
-    console.log('COOKED!')
   }
 
 }

@@ -16,14 +16,15 @@ export class AppComponent implements OnInit {
   subscription: Subscription;
 
   constructor (private ingredientService: IngredientService) {
-  }
-
-  ngOnInit() {
     this.subscription = this.ingredientService.getBalance().subscribe(op => {
       this.balance = op.money;
       if (!op.valid) {
         alert('Not enough funds');
       }
     });
+  }
+
+  ngOnInit() {
+
   }
 }
